@@ -398,5 +398,5 @@ To ensure best security practices in your repo, we recommend anyone creating sol
 ghp_DEMOFAKESECRET4SECRETSCANNINGpUrposesOnly123456
 
 
-This value is NOT a real token. Remove after confirming secret scanning detection._
+This value is NOT a real token. Remove after confirming secret scanning detection.
 
