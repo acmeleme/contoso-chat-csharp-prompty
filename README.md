@@ -380,3 +380,23 @@ trademarks or logos is subject to and must follow
 Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
 
 Any use of third-party trademarks or logos are subject to those third-party's policies.
+
+# Security Guidelines
+
+This template uses [Managed Identity](https://learn.microsoft.com/en-us/entra/identity/managed-identities-azure-resources/overview) or Key Vault to eliminate the need for developers to manage credentials. Applications can use managed identities to obtain Microsoft Entra tokens without having to manage any credentials.
+
+Additionally, we have added a [GitHub Action tool](https://github.com/microsoft/security-devops-action) that scans the infrastructure-as-code files and generates a report containing any detected issues. 
+
+To ensure best security practices in your repo, we recommend anyone creating solutions based on our templates ensure that the [Github secret scanning](https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning) setting is enabled in your repos.
+
+
+ 🚨 **Demo: Fake Secret for Secret Scanning**
+
+ The following string is a fake secret intentionally added to trigger GitHub Secret Scanning for demonstration purposes only:
+
+
+ghp_DEMOFAKESECRET4SECRETSCANNINGpUrposesOnly123456
+
+
+This value is NOT a real token. Remove after confirming secret scanning detection._
+
