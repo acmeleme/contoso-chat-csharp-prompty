@@ -21,7 +21,8 @@ public sealed class ChatService(Kernel kernel, ITextEmbeddingGenerationService e
 
     public async Task<string> GetResponseAsync(string customerId, string question)
     {
-        _logger.LogInformation("CustomerId = {CustomerID}, Question = {Question}", customerId, question);
+        var sanitizedQuestion = SanitizeForLog(question);
+        _logger.LogInformation("CustomerId = {CustomerID}, Question = {Question}", customerId, sanitizedQuestion);
 
         var customerTask = _customerData.GetCustomerAsync(customerId);
         var embeddingTask = _embedding.GenerateEmbeddingAsync(question);
@@ -75,5 +76,18 @@ public sealed class ChatService(Kernel kernel, ITextEmbeddingGenerationService e
             { "context", context },
             { "answer", answer },
         });
+    }
+
+    // Remove line breaks from user-controlled data before logging to reduce log-forgery risk.
+    private static string SanitizeForLog(string value)
+    {
+        if (string.IsNullOrEmpty(value))
+        {
+            return value;
+        }
+
+        return value
+            .Replace("\r", string.Empty)
+            .Replace("\n", string.Empty);
     }
 }
